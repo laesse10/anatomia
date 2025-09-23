@@ -89,7 +89,7 @@ export const HeroHeader = () => {
                                 <Button
                                     asChild
                                     size="sm"
-                                    className={cn(!menuState && isScrolled && 'lg:hidden')}>
+                                    className={cn(isScrolled && 'lg:hidden')}>
                                     <Link href="https://calendly.com/lars-hulsbergen/30min" 
                                             target="_blank" 
                                             rel="noopener noreferrer">
@@ -99,7 +99,7 @@ export const HeroHeader = () => {
                                 <Button
                                     asChild
                                     size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                                    className={cn((isScrolled && !menuState )? 'lg:inline-flex' : 'hidden')}>
                                     <Link href="https://calendly.com/lars-hulsbergen/30min" 
                                             target="_blank" 
                                             rel="noopener noreferrer">
