@@ -149,7 +149,7 @@ export default function HeroSection() {
                             >
                                 <div
                                     key={1}
-                                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
+                                    className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] "
                                 >
                                     <Button asChild size="lg" className="rounded-xl px-5 text-base">
                                         <Link href="https://calendly.com/lars-hulsbergen/30min" 
