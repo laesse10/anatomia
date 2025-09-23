@@ -21,7 +21,7 @@ const transitionVariants = {
 
 export default function HeroSection() {
     return (
-        <section className="relative overflow-hidden pb-50 ">
+        <section className="relative overflow-hidden md:pb-50 pb-20">
             {/* Hintergrundbild (dockt unten an) */}
             <div className="absolute inset-0 -z-50 flex items-end">
                 <Image
