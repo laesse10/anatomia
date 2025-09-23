@@ -15,49 +15,49 @@ export default function FAQsThree() {
     const faqItems: FAQItem[] = [
         {
             id: 'item-1',
-            icon: 'clock',
-            question: 'What are your business hours?',
-            answer: 'Our customer service team is available Monday through Friday from 9:00 AM to 8:00 PM EST, and weekends from 10:00 AM to 6:00 PM EST. During holidays, hours may vary and will be posted on our website.',
+            icon: 'layers',
+            question: 'Wie werden die 3D-Modelle hergestellt?',
+            answer: 'Unsere Modelle werden von unseren Experten aus den von Ihnen übermittelten DICOM-Daten manuell segmentiert und mit modernster 3D-Drucktechnologie präzise gedruckt. So entstehen präzise, maßstabsgetreue Abbildungen für die medizinische Praxis.'
         },
         {
             id: 'item-2',
-            icon: 'credit-card',
-            question: 'How do subscription payments work?',
-            answer: 'Subscription payments are automatically charged to your default payment method on the same day each month or year, depending on your billing cycle. You can update your payment information and view billing history in your account dashboard.',
+            icon: 'shield',
+            question: 'Wie läuft die Datenübergabe ab?',
+            answer: 'Die DICOM-Dateien können direkt in Ihrer Praxis mit unserem bereitgestellten Tool anonymisiert werden. Anschließend werden die Daten sicher an uns übermittelt, sodass höchste Datenschutz- und Sicherheitsstandards der Schweiz eingehalten werden.'
         },
         {
             id: 'item-3',
-            icon: 'truck',
-            question: 'Can I expedite my shipping?',
-            answer: 'Yes, we offer several expedited shipping options at checkout. Next-day and 2-day shipping are available for most U.S. addresses if orders are placed before 2:00 PM EST. International expedited shipping options vary by destination.',
+            icon: 'clock',
+            question: 'Wie lange dauert die Herstellung?',
+            answer: 'In der Regel dauert es etwa eine Woche vom Eingang Ihrer Daten bis zur Lieferung des fertigen 3D-Modells in Ihre Praxis.'
         },
         {
             id: 'item-4',
-            icon: 'globe',
-            question: 'Do you offer localized support?',
-            answer: 'We offer multilingual support in English, Spanish, French, German, and Japanese. Our support team can assist customers in these languages via email, chat, and phone during standard business hours for each respective region.',
+            icon: 'package',
+            question: 'Wie erfolgt die Lieferung?',
+            answer: 'Wir versenden die Modelle per A-Post eingeschrieben, damit Sie Ihre Bestellung schnell und zuverlässig erhalten.'
         },
         {
             id: 'item-5',
-            icon: 'package',
-            question: 'How do I track my order?',
-            answer: 'Once your order ships, you\'ll receive a confirmation email with a tracking number. You can use this number on our website or the carrier\'s website to track your package. You can also view order status and tracking information in your account dashboard under "Order History".',
-        },
+            icon: 'credit-card',
+            question: 'Wer übernimmt die Kosten?',
+            answer: 'Die Rechnungen für unsere 3D-Modelle werden in den meisten Fällen von den Krankenkassen übernommen.'
+        }
     ]
 
     return (
-        <section className="bg-muted dark:bg-background py-20">
+        <section id= "FAQ" className="bg-muted dark:bg-background py-20">
             <div className="mx-auto max-w-5xl px-4 md:px-6">
                 <div className="flex flex-col gap-10 md:flex-row md:gap-16">
                     <div className="md:w-1/3">
                         <div className="sticky top-20">
-                            <h2 className="mt-4 text-3xl font-bold">Frequently Asked Questions</h2>
+                            <h2 className="mt-4 text-3xl font-bold">Häufig gestellte Fragen</h2>
                             <p className="text-muted-foreground mt-4">
-                                Can't find what you're looking for? Contact our{' '}
+                                Konnten Sie nicht finden was Sie suchen? Kontaktieren Sie unser{' '}
                                 <Link
                                     href="#"
                                     className="text-primary font-medium hover:underline">
-                                    customer support team
+                                    Support-Team
                                 </Link>
                             </p>
                         </div>

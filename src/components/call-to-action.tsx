@@ -6,7 +6,7 @@ export default function CallToAction() {
         <section className="py-16 md:py-32">
             <div className="mx-auto max-w-5xl px-6">
                 <div className="text-center">
-                    <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Start Building</h2>
+                    <h2 className="text-balance text-4xl font-semibold lg:text-5xl">In Kontakt treten</h2>
                     <p className="mt-4">Libero sapiente aliquam quibusdam aspernatur.</p>
 
                     <form

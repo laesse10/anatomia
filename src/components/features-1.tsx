@@ -4,18 +4,18 @@ import { ReactNode } from 'react'
 
 export default function Features() {
     return (
-        <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent">
+        <section id="features" className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent">
             <div className="@container mx-auto max-w-5xl px-6">
                 <div className="text-center">
                     <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Die Zukunft der OP-Planung</h2>
-                    <p className="mt-4">Stellen Sie anonymisierten DICOM-Dateien sowie das gewünschte Zielgebiet für eine Operation in unsere Platform, und wir liefern Ihnen ein hochpräzises physisches 3D-Modell für Ihre Planung per Post zu.</p>
+                    <p className="mt-4">Senden Sie uns die anonymisierten DICOM-Dateien zusammen mit der Angabe des gewünschten Operationsgebietes. Wir fertigen daraus ein hochpräzises 3D-Modell und liefern es Ihnen per Post.</p>
                 </div>
                 <div className="@min-4xl:max-w-full @min-4xl:grid-cols-3 mx-auto mt-8 grid max-w-sm gap-6 *:text-center md:mt-16">
                     <Card className="group shadow-zinc-950/5">
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <ShieldUser
-                                    className="size-6"
+                                    className="size-8"
                                     aria-hidden
                                 />
                             </CardDecorator>
@@ -32,7 +32,7 @@ export default function Features() {
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <Microscope
-                                    className="size-6"
+                                    className="size-8"
                                     aria-hidden
                                 />
                             </CardDecorator>
@@ -49,12 +49,12 @@ export default function Features() {
                         <CardHeader className="pb-3">
                             <CardDecorator>
                                 <History
-                                    className="size-6"
+                                    className="size-8"
                                     aria-hidden
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Von Upload zu Modell in kürzester Zeit.</h3>
+                            <h3 className="mt-6 font-medium">Ein physisches Modell in kürzester Zeit.</h3>
                         </CardHeader>
 
                         <CardContent>

@@ -7,10 +7,10 @@ import React from 'react'
 import { cn } from '@/lib/utils'
 
 const menuItems = [
-    { name: 'Features', href: '#link' },
-    { name: 'Solution', href: '#link' },
-    { name: 'Pricing', href: '#link' },
-    { name: 'About', href: '#link' },
+    { name: 'Lösung', href: '#features' },
+    { name: 'Vorteile', href: '#ADVANTAGES' },
+    { name: 'Über uns', href: '#ABOUTUS' },
+    { name: 'FAQs', href: '#FAQ' },
 ]
 
 export const HeroHeader = () => {
@@ -82,24 +82,28 @@ export const HeroHeader = () => {
                                     variant="outline"
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Login</span>
+                                    <Link href="tel:+41787814506">
+                                        <span>Anrufen</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="#">
-                                        <span>Sign Up</span>
+                                    <Link href="https://calendly.com/lars-hulsbergen/30min" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer">
+                                        <span>Online Meeting buchen</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
                                     size="sm"
                                     className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="#">
-                                        <span>Get Started</span>
+                                    <Link href="https://calendly.com/lars-hulsbergen/30min" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer">
+                                        <span>Online Meeting buchen</span>
                                     </Link>
                                 </Button>
                             </div>
