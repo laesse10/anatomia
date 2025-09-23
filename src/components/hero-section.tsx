@@ -100,16 +100,14 @@ export default function HeroSection() {
                                     Ein Schweizer Unternehmen, von ETH Studenten gegründet.
                                 </span>
                                 <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700" />
-                                <div className="bg-background group-hover:bg-muted size-8 md:size-6 overflow-hidden rounded-full duration-500">
-                                    <div className="flex items-center justify-center">
-                                        <Image
-                                            src="/swissFlag.png"
-                                            alt="Switzerland"
-                                            width={35}
-                                            height={35}
-                                            className="m-auto"
-                                        />
-                                    </div>
+                                <div className="bg-background group-hover:bg-muted size-10 md:size-8 flex items-center justify-center overflow-hidden rounded-full duration-500">
+                                    <Image
+                                        src="/swissFlag.png"
+                                        alt="Switzerland"
+                                        width={40}
+                                        height={40}
+                                        className="w-8 h-8 md:w-6 md:h-6"
+                                    />
                                 </div>
                             </Link>
 
