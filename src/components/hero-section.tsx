@@ -154,9 +154,11 @@ export default function HeroSection() {
                                     className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
                                 >
                                     <Button asChild size="lg" className="rounded-xl px-5 text-base">
-                                        <Link href="#C">
-                                            <span className="text-nowrap">Kontakt aufnehmen</span>
-                                        </Link>
+                                        <Link href="https://calendly.com/lars-hulsbergen/30min" 
+                                            target="_blank" 
+                                            rel="noopener noreferrer">
+                                        <span className="text-nowrap">Kontakt aufnehmen</span>
+                                    </Link>
                                     </Button>
                                 </div>
                                 <Button
@@ -166,10 +168,8 @@ export default function HeroSection() {
                                     variant="ghost"
                                     className="h-10.5 rounded-xl px-5"
                                 >
-                                    <Link href="https://calendly.com/lars-hulsbergen/30min" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer">
-                                        <span className="text-nowrap">Eine Demo anfragen</span>
+                                    <Link href="#features">
+                                        <span className="text-nowrap">mehr erfahren</span>
                                     </Link>
                                 </Button>
                             </AnimatedGroup>
