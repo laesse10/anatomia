@@ -137,12 +137,15 @@ export default function HeroSection() {
 
                             <AnimatedGroup
                                 variants={{
-                                    container: {
+                                    container: { visible: { transition: { delayChildren: 1 } } },
+                                    item: {
+                                        hidden: { opacity: 0, y: 20 },
                                         visible: {
-                                            transition: { staggerChildren: 0.05, delayChildren: 0.75 },
+                                            opacity: 1,
+                                            y: 0,
+                                            transition: { type: "spring", bounce: 0.3, duration: 2 },
                                         },
                                     },
-                                    ...transitionVariants,
                                 }}
                                 className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row"
                             >
@@ -151,7 +154,7 @@ export default function HeroSection() {
                                     className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] border p-0.5"
                                 >
                                     <Button asChild size="lg" className="rounded-xl px-5 text-base">
-                                        <Link href="#CALL">
+                                        <Link href="#C">
                                             <span className="text-nowrap">Kontakt aufnehmen</span>
                                         </Link>
                                     </Button>
