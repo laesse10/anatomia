@@ -37,7 +37,7 @@ export default function Features() {
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Präzision, auf die Chirurgen vertrauen.</h3>
+                            <h3 className="mt-6 font-medium">Präzision, auf die Chirurgen vertrauen können.</h3>
                         </CardHeader>
 
                         <CardContent>
