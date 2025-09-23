@@ -89,7 +89,7 @@ export const HeroHeader = () => {
                                 <Button
                                     asChild
                                     size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
+                                    className={cn(!menuState && isScrolled && 'lg:hidden')}>
                                     <Link href="https://calendly.com/lars-hulsbergen/30min" 
                                             target="_blank" 
                                             rel="noopener noreferrer">
