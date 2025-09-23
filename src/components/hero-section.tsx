@@ -30,6 +30,15 @@ const transitionVariants = {
 export default function HeroSection() {
     return (
         <>
+                <div className="absolute inset-0 -z-50">
+        <Image
+            src="https://ik.imagekit.io/lrigu76hy/tailark/night-background.jpg"
+            alt="Hero background"
+            fill
+            className="object-cover"
+            priority
+        />
+        </div>
             <HeroHeader />
             <main className="overflow-hidden">
                 <div
@@ -108,7 +117,7 @@ export default function HeroSection() {
                                     speedSegment={0.3}
                                     as="h1"
                                     className="mx-auto mt-8 max-w-4xl text-balance text-5xl max-md:font-semibold md:text-7xl lg:mt-16 xl:text-[5.25rem]">
-                                    Modern Solutions for Customer Engagement
+                                    3D-Modelle für präzise OP-Planung
                                 </TextEffect>
                                 <TextEffect
                                     per="line"
@@ -117,7 +126,7 @@ export default function HeroSection() {
                                     delay={0.5}
                                     as="p"
                                     className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                                    Highly customizable components for building modern websites and applications that look and feel the way you mean it.
+                                    Wir erstellen physische 3D-Modelle aus CT- und MRT-Daten, die Chirurgen bei der Planung und Durchführung von Operationen unterstützen.
                                 </TextEffect>
 
                                 <AnimatedGroup
@@ -141,7 +150,7 @@ export default function HeroSection() {
                                             size="lg"
                                             className="rounded-xl px-5 text-base">
                                             <Link href="#link">
-                                                <span className="text-nowrap">Start Building</span>
+                                                <span className="text-nowrap">Kontakt aufnehmen</span>
                                             </Link>
                                         </Button>
                                     </div>
@@ -152,7 +161,7 @@ export default function HeroSection() {
                                         variant="ghost"
                                         className="h-10.5 rounded-xl px-5">
                                         <Link href="#link">
-                                            <span className="text-nowrap">Request a demo</span>
+                                            <span className="text-nowrap">Eine Demo anfragen</span>
                                         </Link>
                                     </Button>
                                 </AnimatedGroup>

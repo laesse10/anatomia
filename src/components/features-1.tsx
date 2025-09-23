@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
-import { Settings2, Sparkles, Zap } from 'lucide-react'
+import { History, Microscope, ShieldUser } from 'lucide-react'
 import { ReactNode } from 'react'
 
 export default function Features() {
@@ -7,58 +7,58 @@ export default function Features() {
         <section className="bg-zinc-50 py-16 md:py-32 dark:bg-transparent">
             <div className="@container mx-auto max-w-5xl px-6">
                 <div className="text-center">
-                    <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Built to cover your needs</h2>
-                    <p className="mt-4">Libero sapiente aliquam quibusdam aspernatur, praesentium iusto repellendus.</p>
+                    <h2 className="text-balance text-4xl font-semibold lg:text-5xl">Die Zukunft der OP-Planung</h2>
+                    <p className="mt-4">Stellen Sie anonymisierten DICOM-Dateien sowie das gewünschte Zielgebiet für eine Operation in unsere Platform, und wir liefern Ihnen ein hochpräzises physisches 3D-Modell für Ihre Planung per Post zu.</p>
                 </div>
                 <div className="@min-4xl:max-w-full @min-4xl:grid-cols-3 mx-auto mt-8 grid max-w-sm gap-6 *:text-center md:mt-16">
                     <Card className="group shadow-zinc-950/5">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Zap
+                                <ShieldUser
                                     className="size-6"
                                     aria-hidden
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Customizable</h3>
+                            <h3 className="mt-6 font-medium">Ihre Patientendaten bleiben geschützt.</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="text-sm">Extensive customization options, allowing you to tailor every aspect to meet your specific needs.</p>
+                            <p className="text-sm">Wir verarbeiten ausschließlich anonymisierte Dateien und übertragen sie über sichere, verschlüsselte Kanäle.</p>
                         </CardContent>
                     </Card>
 
                     <Card className="group shadow-zinc-950/5">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Settings2
+                                <Microscope
                                     className="size-6"
                                     aria-hidden
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">You have full control</h3>
+                            <h3 className="mt-6 font-medium">Präzision, auf die Chirurgen vertrauen.</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="mt-3 text-sm">From design elements to functionality, you have complete control to create a unique and personalized experience.</p>
+                            <p className="text-sm">Aus Ihren CT- oder MRT-Daten erstellen wir hochpräzise 3D-Modelle, die eine realistische und detailgetreue Operationsvorbereitung ermöglichen.</p>
                         </CardContent>
                     </Card>
 
                     <Card className="group shadow-zinc-950/5">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Sparkles
+                                <History
                                     className="size-6"
                                     aria-hidden
                                 />
                             </CardDecorator>
 
-                            <h3 className="mt-6 font-medium">Powered By AI</h3>
+                            <h3 className="mt-6 font-medium">Von Upload zu Modell in kürzester Zeit.</h3>
                         </CardHeader>
 
                         <CardContent>
-                            <p className="mt-3 text-sm">Elements to functionality, you have complete control to create a unique experience.</p>
+                            <p className="text-sm">Innerhalb weniger Tagen erhalten Sie Ihr fertiges Modell per Post – bereit für die präoperative Planung.</p>
                         </CardContent>
                     </Card>
                 </div>
