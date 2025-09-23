@@ -106,7 +106,7 @@ export default function HeroSection() {
                                         alt="Switzerland"
                                         width={40}
                                         height={40}
-                                        className="w-8 h-8 md:w-6 md:h-6"
+                                        className="aspect-square w-8 h-8 md:w-6 md:h-6 object-contain"
                                     />
                                 </div>
                             </Link>
