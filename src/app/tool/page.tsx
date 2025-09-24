@@ -220,8 +220,8 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool):
 
         // ZIP im Python-Layer erstellen und dann aus dem FS holen
         await pyo.runPythonAsync(`import shutil; shutil.make_archive('${outRoot}', 'zip', '${outRoot}')`);
-        const zipData = pyo.FS.readFile(`${outRoot}.zip`);
-        const blob = new Blob([zipData], { type: "application/zip" });
+        const zipData = pyo.FS.readFile(`${outRoot}.zip`) as Uint8Array;
+        const blob = new Blob([new Uint8Array(zipData)], { type: "application/zip" });
         const url = URL.createObjectURL(blob);
 
         const patientId = patientIdInput?.value.trim();
