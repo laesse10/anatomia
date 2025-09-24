@@ -187,7 +187,7 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
         pyodide.globals.set("outroot", outRoot);
         pyodide.globals.set("shift_dates", shift === "True");
         pyodide.globals.set("patient_id", patientId);
-        const [outPath, mapCsvPath] = await pyodide.runPythonAsync(`anonymize_tree(Path(inroot), Path(outroot), shift_dates, patient_id)`);
+        await pyodide.runPythonAsync(`anonymize_tree(Path(inroot), Path(outroot), shift_dates, patient_id)`);
         log("Anonymisierung abgeschlossen. Verpacke Ergebnisse …");
 
         const zipPath = `${outRoot}.zip`;

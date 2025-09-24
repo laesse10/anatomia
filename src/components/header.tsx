@@ -11,6 +11,7 @@ const menuItems = [
     { name: 'Vorteile', href: '#ADVANTAGES' },
     { name: 'Über uns', href: '#ABOUTUS' },
     { name: 'FAQs', href: '#FAQ' },
+    {name : 'Dicom-Anonymisierer', href: 'tool'}
 ]
 
 export const HeroHeader = () => {
