@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils'
-import Image from 'next/image'
 
 
 export const Logo = ({
@@ -10,12 +9,10 @@ export const Logo = ({
   return (
     <div className={cn("flex items-center space-x-3", className)}>
       {/* PNG links */}
-      <Image
+      <img
         src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/logo.png"
         alt="Logo"
-        width={40}
-        height={40}
-        priority
+        className="h-10 w-10"
       />
       {/* Schriftzug rechts */}
       <span className="text-xl text-[#dc143c] font-roboto">

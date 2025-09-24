@@ -1,3 +1,4 @@
+import CallToAction from "@/components/call-to-action";
 import ContentSection from "@/components/content-7";
 import FAQsThree from "@/components/faqs-3";
 import Features from "@/components/features-1";

@@ -1,3 +1,9 @@
+import { LogoIcon } from '@/components/logo'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import Link from 'next/link'
+
 export default function KontaktPage() {
     return (
         <section id ="CALL" className="flex  items-center justify-center bg-muted px-4 pt-10 dark:bg-background ">

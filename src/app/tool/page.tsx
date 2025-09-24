@@ -1,45 +1,75 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
+
+/** ---- Minimal-Typen für Pyodide, damit kein `any` nötig ist ---- */
+type PyodideFSStat = { mode: number };
+type PyodideFS = {
+  mkdirTree: (path: string) => void;
+  writeFile: (path: string, data: Uint8Array | string) => void;
+  readFile: (path: string) => Uint8Array;
+  readdir: (path: string) => string[];
+  stat: (path: string) => PyodideFSStat;
+  isDir: (mode: number) => boolean;
+};
+
+type PyodideGlobals = {
+  set: (name: string, value: unknown) => void;
+};
+
+type Pyodide = {
+  loadPackage: (name: string) => Promise<void>;
+  runPythonAsync: (code: string) => Promise<unknown>;
+  FS: PyodideFS;
+  globals: PyodideGlobals;
+};
+
+type WindowWithPyodide = Window &
+  Partial<{
+    loadPyodide: (opts: { indexURL: string }) => Promise<Pyodide>;
+  }>;
+/** ---------------------------------------------------------------- */
 
 export default function ToolPage() {
   useEffect(() => {
-    const statusEl = document.getElementById("status") as HTMLDivElement;
-    const startBtn = document.getElementById("startBtn") as HTMLButtonElement;
-    const fileInput = document.getElementById("fileInput") as HTMLInputElement;
-    const shiftDatesEl = document.getElementById("shiftDates") as HTMLInputElement;
-    const downloadLink = document.getElementById("downloadLink") as HTMLAnchorElement;
+    const statusEl = document.getElementById("status") as HTMLDivElement | null;
+    const startBtn = document.getElementById("startBtn") as HTMLButtonElement | null;
+    const fileInput = document.getElementById("fileInput") as HTMLInputElement | null;
+    const shiftDatesEl = document.getElementById("shiftDates") as HTMLInputElement | null;
+    const patientIdInput = document.getElementById("patientIdInput") as HTMLInputElement | null;
 
-    if (fileInput) {
-      fileInput.setAttribute("webkitdirectory", "");
-    }
+    // Ordnerauswahl aktivieren
+    if (fileInput) fileInput.setAttribute("webkitdirectory", "");
 
-    let pyodide: any;
+    let pyodide: Pyodide | null = null;
 
     function log(msg: string) {
-      if (statusEl) {
-        statusEl.textContent += (statusEl.textContent ? "\n" : "") + msg;
-        statusEl.scrollTop = statusEl.scrollHeight;
-      }
+      if (!statusEl) return;
+      statusEl.textContent += (statusEl.textContent ? "\n" : "") + msg;
+      statusEl.scrollTop = statusEl.scrollHeight;
     }
 
-    async function loadPyodideAndPackages() {
+    async function loadPyodideAndPackages(): Promise<Pyodide> {
       if (pyodide) return pyodide;
       log("Lade Pyodide …");
 
-      // Dynamically load Pyodide script
+      // Pyodide-Skript laden (einmalig)
       const script = document.createElement("script");
       script.src = "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js";
-      script.async = true;
-
-      await new Promise((resolve, reject) => {
-        script.onload = () => resolve(null);
+      const loaded = new Promise<void>((resolve, reject) => {
+        script.onload = () => resolve();
         script.onerror = () => reject(new Error("Pyodide script failed to load."));
-        document.body.appendChild(script);
       });
+      document.body.appendChild(script);
+      await loaded;
 
-      pyodide = await (window as any).loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/" });
+      const w = window as WindowWithPyodide;
+      if (!w.loadPyodide) throw new Error("window.loadPyodide nicht verfügbar.");
+
+      pyodide = await w.loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/" });
       log("Pyodide geladen. Installiere pydicom …");
+
       await pyodide.loadPackage("micropip");
       await pyodide.runPythonAsync(`
 import micropip
@@ -49,6 +79,7 @@ await micropip.install('pydicom==2.4.4')
       return pyodide;
     }
 
+    // Python-Code (unverändert zur Browser-Ausführung)
     const PY_CODE = `
 import os, csv, uuid, random
 from datetime import datetime, timedelta
@@ -82,7 +113,7 @@ def shift_date(val: str, days: int):
 def ensure_dir(p: Path):
     p.parent.mkdir(parents=True, exist_ok=True)
 
-def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: str):
+def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool):
     outroot.mkdir(parents=True, exist_ok=True)
 
     patient_id_map = {}
@@ -150,69 +181,70 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
     return str(outroot), str(map_csv);
 `;
 
-    async function runAnonymizer() {
-      if (downloadLink) downloadLink.classList.add("hidden");
-      const files = Array.from(fileInput?.files || []);
-      const patientIdInput = document.getElementById("patientIdInput") as HTMLInputElement;
-      const patientId = patientIdInput?.value.trim() || "PatientenID";
-
-      if (!files.length) {
+    async function runAnonymizer(): Promise<void> {
+      const files = Array.from(fileInput?.files ?? []);
+      if (files.length === 0) {
         log("Bitte zuerst einen Ordner wählen.");
         return;
       }
 
-      await loadPyodideAndPackages();
+      const pyo = await loadPyodideAndPackages();
 
       log(`Kopiere ${files.length} Datei(en) in das virtuelle Dateisystem …`);
       const inRoot = "/in";
-      const outRoot = `/out/${patientId}_Dicoms`;
-      pyodide.FS.mkdirTree(inRoot);
-      pyodide.FS.mkdirTree(outRoot);
+      const outRoot = "/out";
+      pyo.FS.mkdirTree(inRoot);
+      pyo.FS.mkdirTree(outRoot);
 
       for (const f of files) {
-        const rel = f.webkitRelativePath && f.webkitRelativePath.length > 0 ? f.webkitRelativePath : f.name;
+        const rel = (f as File & { webkitRelativePath?: string }).webkitRelativePath || f.name;
         const path = `${inRoot}/${rel}`;
         const dir = path.substring(0, path.lastIndexOf("/"));
-        if (dir) pyodide.FS.mkdirTree(dir);
+        if (dir) pyo.FS.mkdirTree(dir);
         const buf = new Uint8Array(await f.arrayBuffer());
-        pyodide.FS.writeFile(path, buf);
+        pyo.FS.writeFile(path, buf);
       }
 
       log("Starte Anonymisierung …");
-      const shift = shiftDatesEl?.checked ? "True" : "False";
+      const shift = Boolean(shiftDatesEl?.checked);
+
       try {
-        pyodide.globals.set("PY_CODE", PY_CODE);
-        await pyodide.runPythonAsync("exec(PY_CODE, globals())");
-        pyodide.globals.set("inroot", "/in");
-        pyodide.globals.set("outroot", outRoot);
-        pyodide.globals.set("shift_dates", shift === "True");
-        pyodide.globals.set("patient_id", patientId);
-        await pyodide.runPythonAsync(`anonymize_tree(Path(inroot), Path(outroot), shift_dates, patient_id)`);
+        pyo.globals.set("PY_CODE", PY_CODE);
+        await pyo.runPythonAsync("exec(PY_CODE, globals())");
+        pyo.globals.set("inroot", "/in");
+        pyo.globals.set("outroot", "/out");
+        pyo.globals.set("shift_dates", shift);
+        // Rückgabewerte werden nicht verwendet → kein ungenutztes Binding erzeugen
+        await pyo.runPythonAsync(`anonymize_tree(Path(inroot), Path(outroot), shift_dates)`);
         log("Anonymisierung abgeschlossen. Verpacke Ergebnisse …");
 
-        const zipPath = `${outRoot}.zip`;
-        const renamedZipPath = `/out/${patientId}_Dicoms.zip`;
-        await pyodide.runPythonAsync(`import shutil; shutil.make_archive('${outRoot}', 'zip', '${outRoot}')`);
-        pyodide.FS.rename(zipPath, renamedZipPath);
-        const zipData = pyodide.FS.readFile(renamedZipPath);
-
+        // ZIP im Python-Layer erstellen und dann aus dem FS holen
+        await pyo.runPythonAsync(`import shutil; shutil.make_archive('${outRoot}', 'zip', '${outRoot}')`);
+        const zipData = pyo.FS.readFile(`${outRoot}.zip`);
         const blob = new Blob([zipData], { type: "application/zip" });
         const url = URL.createObjectURL(blob);
 
+        const patientId = patientIdInput?.value.trim();
+        if (!patientId) {
+          log("Bitte geben Sie eine Patienten-ID ein.");
+          return;
+        }
+
+        const zipFileName = `${patientId}_Dicoms.zip`;
+
         const a = document.createElement("a");
         a.href = url;
-        a.download = `${patientId}_Dicoms.zip`;
+        a.download = zipFileName;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
 
         log("ZIP-Datei wurde heruntergeladen.");
-      } catch (e) {
+      } catch (e: unknown) {
+        const msg = e instanceof Error ? e.message : String(e);
         console.error(e);
-        log("Fehler während der Ausführung: " + e);
-        return;
+        log("Fehler während der Ausführung: " + msg);
       }
-
       log("Fertig. ZIP ist bereit zum Download.");
     }
 
@@ -223,52 +255,29 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
         if (startBtn) startBtn.disabled = false;
       });
     });
-
-    const loadPyodideScript = async () => {
-      if (!(window as any).loadPyodide) {
-        const script = document.createElement("script");
-        script.src = "https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js";
-        script.onload = () => {
-          log("Pyodide-Skript geladen.");
-        };
-        script.onerror = () => {
-          log("Fehler beim Laden des Pyodide-Skripts.");
-        };
-        document.body.appendChild(script);
-        await new Promise((resolve) => script.onload = resolve);
-      }
-    };
-
-    loadPyodideScript().then(() => {
-      log("Pyodide-Skript erfolgreich geladen.");
-    }).catch((error) => {
-      console.error("Fehler beim Laden des Pyodide-Skripts:", error);
-    });
   }, []);
 
   return (
     <div className="h-full text-slate-100">
       <div className="max-w-5xl mx-auto p-6">
-        <header className="flex items-center justify-between gap-4">
-          <h1 className="text-2xl sm:text-3xl font-semibold">Client‑seitige DICOM‑Anonymisierung</h1>
-          <a
-            href="https://pydicom.github.io/"
-            target="_blank"
-            className="text-xs underline opacity-80 hover:opacity-100"
-          >
-            pydicom Doku
-          </a>
+        <header className="flex flex-col items-start gap-4">
+          <h1 className="text-2xl sm:text-3xl font-semibold text-black">Dicom Anonymisierungs Tool</h1>
+          <Link href="/">
+            <button className="rounded-xl bg-gray-600 hover:bg-gray-500 px-4 py-2 text-sm font-medium">
+              Zurück
+            </button>
+          </Link>
         </header>
 
         <p className="mt-4 text-slate-300">
-          Alle Dateien bleiben im Browser (kein Upload auf den Server). Wähle einen DICOM‑Ordner, optional
+          Alle Dateien bleiben im Browser (kein Upload auf den Server). Wähle einen DICOM-Ordner, optional
           Datumsshift aktivieren, dann <span className="mono">Start</span>. Ergebnis ist ein ZIP mit anonymisierten
           DICOMs und <span className="mono">anonymization_mapping.csv</span>.
         </p>
 
         <section className="mt-6 grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl bg-slate-900/60 p-4 shadow">
-            <label className="block text-sm mb-2">DICOM‑Eingabeordner</label>
+            <label className="block text-sm mb-2">DICOM-Eingabeordner</label>
             <input
               id="fileInput"
               type="file"
@@ -276,7 +285,7 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
               className="block w-full text-sm file:mr-4 file:rounded-xl file:border-0 file:bg-indigo-600 file:px-4 file:py-2 file:text-white hover:file:bg-indigo-500"
             />
             <p className="mt-2 text-xs text-slate-400">
-              Tipp: Wähle den Studien‑/Serie‑Ordner; die Ordnerstruktur wird im ZIP gespiegelt.
+              Tipp: Wähle den Studien-/Serie-Ordner; die Ordnerstruktur wird im ZIP gespiegelt.
             </p>
 
             <div className="mt-4 flex items-center gap-3">
@@ -287,12 +296,12 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
             </div>
 
             <div className="mt-4">
-              <label htmlFor="patientIdInput" className="block text-sm mb-2">Patienten-ID</label>
+              <label htmlFor="patientIdInput" className="block text-sm mb-2">Patienten-ID (optional)</label>
               <input
                 id="patientIdInput"
                 type="text"
-                placeholder="Gib eine Patienten-ID ein"
-                className="block w-full text-sm rounded-xl border px-4 py-2 bg-slate-800 text-white placeholder-slate-400"
+                placeholder="Geben Sie die Patienten-ID ein um die Output Datei zu benennen"
+                className="block w-full text-sm rounded-xl border-gray-300 px-4 bg-gray-400 py-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
             </div>
 
@@ -303,13 +312,6 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
               >
                 Start
               </button>
-              <a
-                id="downloadLink"
-                className="hidden rounded-xl bg-indigo-600 hover:bg-indigo-500 px-4 py-2 text-sm font-medium"
-                download
-              >
-                ZIP herunterladen
-              </a>
             </div>
           </div>
 
@@ -328,7 +330,7 @@ def anonymize_tree(inroot: Path, outroot: Path, shift_dates: bool, patient_id: s
           <p>
             <strong>Beispiel:</strong> Du wählst einen Ordner mit <em>120 DICOMs</em>, aktivierst die Datumsschift und
             klickst auf <em>Start</em>. Nach dem Lauf erhältst du ein ZIP mit der gleichen Ordnerstruktur, anonymisierten
-            UIDs/Patientenfeldern sowie eine Mapping‑CSV für die Nachvollziehbarkeit.
+            UIDs/Patientenfeldern sowie eine Mapping-CSV für die Nachvollziehbarkeit.
           </p>
         </footer>
       </div>
