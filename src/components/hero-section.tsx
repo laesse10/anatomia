@@ -97,7 +97,7 @@ export default function HeroSection() {
                                 className="hover:bg-muted bg-background dark:hover:border-t-border group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-zinc-950/5 transition-colors duration-300 dark:border-t-white/5 dark:shadow-zinc-950"
                             >
                                 <span className="text-foreground text-sm">
-                                    Ein Schweizer Unternehmen, von ETH Studenten gegründet.
+                                    Ein Schweizer Unternehmen, von ETH Zürich Studenten gegründet.
                                 </span>
                                 <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700" />
                                 <div className="bg-background group-hover:bg-muted size-10 md:size-8 flex items-center justify-center overflow-hidden rounded-full duration-500">
