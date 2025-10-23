@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Anatomie3D - Präzise 3D-Modelle",
+  title: "Anatomia - Präzise 3D-Modelle",
   description: "3D-Modelle für präzise OP-Planung aus CT- und MRT-Daten.",
   icons: {
     icon: "/favicon.png", 
