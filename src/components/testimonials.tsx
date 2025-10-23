@@ -4,7 +4,7 @@ export default function TestimonialsSection() {
             <div className="mx-auto max-w-5xl px-6">
                 <div className="mx-auto max-w-2xl">
                     <blockquote>
-                        <p className="text-lg font-semibold sm:text-xl md:text-3xl">"Dank der präzisen 3D-Modelle kann ich Operationen deutlich genauer planen und meinen Patienten komplexe Eingriffe verständlich visualisieren. Das spart Zeit, reduziert Risiken und schafft Vertrauen.“</p>
+                        <p className="text-lg font-semibold sm:text-xl md:text-3xl">“Dank der präzisen 3D-Modelle kann ich Operationen deutlich genauer planen und meinen Patienten komplexe Eingriffe verständlich visualisieren. Das spart Zeit, reduziert Risiken und schafft Vertrauen.“</p>
 
                         <div className="mt-12 flex items-center gap-6">
                             <img className="h-7 w-fit dark:invert" src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/gksgBig.png" alt="KieferChirurgie Logo" height="20" width="auto" />
