@@ -6,14 +6,37 @@ export default function TestimonialsSection() {
                     <blockquote>
                         <p className="text-lg font-semibold sm:text-xl md:text-3xl">“Dank der präzisen 3D-Modelle kann ich Operationen deutlich genauer planen und meinen Patienten komplexe Eingriffe verständlich visualisieren. Das spart Zeit, reduziert Risiken und schafft Vertrauen.“</p>
 
-                        <div className="mt-12 flex items-center gap-6">
-                            <img className="h-23 w-fit dark:invert" src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/gksgBig.png" alt="KieferChirurgie Logo" height="100" width="auto" />
-                            <img className="h-18 w-fit dark:invert rounded-full" src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/RLebeda.jpg" alt="KieferChirurgie Logo" height="100" width="auto" />
-                            <div className="space-y-1 border-l pl-6">
+                        <div className="mt-12 flex flex-col items-center gap-6 md:flex-row md:items-center">
+                            <a
+                                href="https://www.gksg.ch/de/zentrum/winterthur/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <img
+                                className="h-23 w-fit dark:invert"
+                                src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/gksgBig.png"
+                                alt="KieferChirurgie Logo"
+                                height="100"
+                                width="auto"
+                                />
+                            </a>
+
+                            <div className="flex items-center gap-6">
+                                <img
+                                className="h-18 w-18 rounded-full object-cover dark:invert"
+                                src="https://raw.githubusercontent.com/laesse10/anatomia/main/public/RLebeda.jpg"
+                                alt="KieferChirurgie Portrait"
+                                height="100"
+                                width="100"
+                                />
+                                <div className="space-y-1 border-l pl-6">
                                 <cite className="font-medium">Dr. Dr. med. R. Lebeda</cite>
-                                <span className="text-muted-foreground block text-sm">Kiefer- und Gesichtschirurgie Lebeda, Winterthur</span>
+                                <span className="text-muted-foreground block text-sm">
+                                    Kiefer- und Gesichtschirurgie Lebeda, Winterthur
+                                </span>
+                                </div>
                             </div>
-                        </div>
+                            </div>
                     </blockquote>
                 </div>
             </div>
