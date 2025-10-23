@@ -19,7 +19,7 @@ export const Logo = ({
         className="text-xl text-[#dc143c] font-medium"
         style={{ fontFamily: "'Inter', 'Roboto Flex', uiSansSerif, system-ui, -apple-system" }}
       >
-        ANATOMIA
+        Anatomia
       </span>
     </div>
   )
