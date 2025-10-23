@@ -15,7 +15,7 @@ export const Logo = ({
         className="h-10 w-10"
       />
       {/* Schriftzug rechts */}
-      <span className="text-xl text-[#dc143c] font-roboto">
+      <span className="text-xl text-[#dc143c] font-montserrat font-bold">
     Anatomie3D
     </span>
     </div>
