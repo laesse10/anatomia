@@ -31,7 +31,7 @@ export default function ContentSection2() {
                     </div>
                     <div className="relative mt-0 sm:mt-0 self-start">
                         <div className="aspect-67/45 relative rounded-3xl from-zinc-300 to-transparent p-px dark:from-zinc-700 overflow-hidden">
-                            <Image src="/surgeonJaw.png" alt="payments illustration light" width={1206} height={200} />
+                            <Image src="/Jaw3d.png" alt="payments illustration light" width={1206} height={200} />
                             {/* White fade overlay */}
                             
                         </div>
