@@ -128,9 +128,7 @@ export default function HeroSection() {
                                 as="p"
                                 className="mx-auto mt-8 max-w-2xl text-balance text-lg"
                             >
-                                Wir erstellen physische 3D-Modelle aus CT- und MRT-Daten, die
-                                Chirurgen bei der Planung und Durchführung von Operationen
-                                unterstützen.
+                                Für Kieferchirurgen – präzise OP-Planung mit patientenspezifischen 3D-Modellen
                             </TextEffect>
 
                             <AnimatedGroup

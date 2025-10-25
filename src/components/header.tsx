@@ -94,7 +94,7 @@ export const HeroHeader = () => {
                                     <Link href="https://calendly.com/lars-hulsbergen/30min" 
                                             target="_blank" 
                                             rel="noopener noreferrer">
-                                        <span>Online Meeting buchen</span>
+                                        <span>Beratungstermin buchen</span>
                                     </Link>
                                 </Button>
                                 <Button
@@ -104,7 +104,7 @@ export const HeroHeader = () => {
                                     <Link href="https://calendly.com/lars-hulsbergen/30min" 
                                             target="_blank" 
                                             rel="noopener noreferrer">
-                                        <span>Online Meeting buchen</span>
+                                        <span>Beratungstermin buchen</span>
                                     </Link>
                                 </Button>
                             </div>
