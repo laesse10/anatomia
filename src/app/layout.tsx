@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 
 
 
@@ -32,6 +33,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* Load Contentsquare/Hotjar script asynchronously after the page is interactive */}
+        <Script
+          src="https://t.contentsquare.net/uxa/029cf532918a8.js"
+          strategy="afterInteractive"
+        />
         {children}
       </body>
     </html>

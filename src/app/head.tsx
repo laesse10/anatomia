@@ -1,7 +1,7 @@
 export default function Head() {
   return (
     <>
-      <script src="https://t.contentsquare.net/uxa/029cf532918a8.js"></script>
+      {/* Fonts and meta only — scripts should be loaded via next/script in layout.tsx */}
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
