@@ -150,7 +150,7 @@ export default function HeroSection() {
                                     className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] "
                                 >
                                     <Button asChild size="lg" className="rounded-xl px-5 text-base">
-                                        <a href={`mailto:lars.hulsbergen@anatomia.ch?subject=Demomodell%20Bestellung&body=Guten%20Tag%2C%0A%0AGerne%20w%C3%BCrde%20ich%20ein%20Mandibula-Demomodell%20bestellen.%20Bitte%20senden%20Sie%20das%20Model%20an%20folgende%20Adresse%3A`}>
+                                        <a href={`mailto:lars.hulsbergen@anatomia.ch?subject=Demomodell%20Anforderung&body=Guten%20Tag%2C%0A%0Agerne%20w%C3%BCrde%20ich%20ein%20Mandibula-Demomodell%20anfordern.%20Bitte%20senden%20Sie%20das%20Modell%20an%20folgende%20Adresse%3A`}>
                                             <span className="text-nowrap">Kostenloses Demomodell anfordern</span>
                                         </a>
                                     </Button>

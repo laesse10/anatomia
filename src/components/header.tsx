@@ -89,20 +89,22 @@ export const HeroHeader = () => {
                                 </Button>
                                 <Button
                                     asChild
+                                    variant="outline"
                                     size="sm"
-                                    className={cn(isScrolled && 'lg:hidden')}>
-                                    <Link href="https://calendly.com/lars-hulsbergen/30min" 
-                                            target="_blank" 
+                                    className={cn('bg-gray-200 text-gray-700 border-gray-300 hover:bg-gray-300', isScrolled && 'lg:hidden')}>
+                                    <Link href="https://calendly.com/lars-hulsbergen/30min"
+                                            target="_blank"
                                             rel="noopener noreferrer">
                                         <span>Beratungstermin buchen</span>
                                     </Link>
                                 </Button>
                                 <Button
                                     asChild
+                                    variant="outline"
                                     size="sm"
-                                    className={cn((isScrolled && !menuState )? 'lg:inline-flex' : 'hidden')}>
-                                    <Link href="https://calendly.com/lars-hulsbergen/30min" 
-                                            target="_blank" 
+                                    className={cn('bg-gray-200 text-gray-700 border-gray-300 hover:bg-gray-300', (isScrolled && !menuState )? 'lg:inline-flex' : 'hidden')}>
+                                    <Link href="https://calendly.com/lars-hulsbergen/30min"
+                                            target="_blank"
                                             rel="noopener noreferrer">
                                         <span>Beratungstermin buchen</span>
                                     </Link>
