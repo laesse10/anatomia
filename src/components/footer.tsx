@@ -48,7 +48,7 @@ export default function FooterSection() {
             <div className="fixed bottom-8 right-8 z-50 block md:hidden">
                 <a
                     href="tel:+41787814506"
-                    className="flex items-center gap-2 rounded-full bg-red-600 px-5 py-3 text-white shadow-lg hover:bg-red-700 transition-colors duration-200"
+                    className="flex items-center gap-2 rounded-full bg-gray-200 px-5 py-3 text-gray-700 shadow-lg hover:bg-gray-300 transition-colors duration-200 border border-gray-300"
                     style={{ boxShadow: '0 4px 24px rgba(0,0,0,0.15)' }}
                 >
                     <Phone className="size-5" />
