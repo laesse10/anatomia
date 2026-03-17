@@ -150,11 +150,9 @@ export default function HeroSection() {
                                     className="bg-foreground/10 rounded-[calc(var(--radius-xl)+0.125rem)] "
                                 >
                                     <Button asChild size="lg" className="rounded-xl px-5 text-base">
-                                        <Link href="https://calendly.com/lars-hulsbergen/30min" 
-                                            target="_blank" 
-                                            rel="noopener noreferrer">
-                                        <span className="text-nowrap">Kontakt aufnehmen</span>
-                                    </Link>
+                                        <a href={`mailto:lars.hulsbergen@anatomia.ch?subject=Demomodell%20Bestellung&body=Guten%20Tag%2C%0A%0AGerne%20w%C3%BCrde%20ich%20ein%20Mandibula-Demomodell%20bestellen.%20Bitte%20senden%20Sie%20das%20Model%20an%20folgende%20Adresse%3A`}>
+                                            <span className="text-nowrap">Kostenloses Demomodell anfordern</span>
+                                        </a>
                                     </Button>
                                 </div>
                                 <Button
